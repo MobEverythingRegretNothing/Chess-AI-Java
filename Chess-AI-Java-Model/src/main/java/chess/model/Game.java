@@ -1,4 +1,4 @@
 package chess.model;
 
-public class Alpha {
+public class Game {
 }

@@ -1,4 +1,4 @@
 package chess.model;
 
-public class Piece {
+public class BoardRow {
 }
