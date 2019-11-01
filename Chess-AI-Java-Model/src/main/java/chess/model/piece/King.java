@@ -23,7 +23,6 @@ public class King implements Piece {
         return Collections.emptyList();
     }
 
-    @Override
     public boolean isValidMove(Position startPosition, Position endPosition) {
         return Math.abs(startPosition.getBoardColumn().getPosition() - endPosition.getBoardColumn().getPosition()) < 2 &&
                 Math.abs(startPosition.getBoardRow().getPosition() - endPosition.getBoardRow().getPosition()) < 2;

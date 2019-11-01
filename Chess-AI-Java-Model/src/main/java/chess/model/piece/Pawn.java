@@ -22,7 +22,6 @@ public class Pawn implements Piece {
         return Collections.emptyList();
     }
 
-    @Override
     public boolean isValidMove(Position startPosition, Position endPosition) {
         if (color == WHITE) {
             if (2 == startPosition.getBoardRow().getPosition()) {

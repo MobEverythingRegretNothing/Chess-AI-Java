@@ -17,58 +17,6 @@ import static org.junit.Assert.*;
 public class RookTest {
 
     @Test
-    public void emptyBoard_rookMovesInRow() {
-        Rook whiteRook = new Rook(WHITE);
-        assertTrue("White Rook can't move along the row (empty board)",
-                whiteRook.isValidMove(
-                        new Position(A, ONE),
-                        new Position(A, SEVEN)
-                ));
-
-        Rook blackRook = new Rook(BLACK);
-        assertTrue("Black Rook can't move along the row (empty board)",
-                blackRook.isValidMove(
-                        new Position(A, ONE),
-                        new Position(A, SEVEN)
-                ));
-    }
-
-    @Test
-    public void emptyBoard_rookMovesInColumn() {
-        Rook whiteRook = new Rook(WHITE);
-        assertTrue("White Rook can't move along column (empty board)",
-                whiteRook.isValidMove(
-                        new Position(A, ONE),
-                        new Position(G, ONE)
-                ));
-
-        Rook blackRook = new Rook(BLACK);
-        assertTrue("Black Rook can't move along column (empty board)",
-                blackRook.isValidMove(
-                        new Position(F, THREE),
-                        new Position(H, THREE)
-                ));
-    }
-
-    @Test
-    public void emptyBoard_rookCantMoveDiagonally() {
-        Rook whiteRook = new Rook(WHITE);
-        assertFalse("White Rook can move diagonally (empty board)",
-                whiteRook.isValidMove(
-                        new Position(A, ONE),
-                        new Position(B, TWO)
-                ));
-
-        Rook blackRook = new Rook(BLACK);
-
-        assertFalse("Black Rook can move diagonally (empty board)",
-                blackRook.isValidMove(
-                        new Position(A, ONE),
-                        new Position(C, THREE)
-                ));
-    }
-
-    @Test
     public void getValidMoves_EmptyBoard() {
         Rook whiteRook = new Rook(WHITE);
         GameState state = new GameState();

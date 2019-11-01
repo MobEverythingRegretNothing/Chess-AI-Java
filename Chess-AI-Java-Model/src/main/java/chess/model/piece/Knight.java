@@ -23,7 +23,6 @@ public class Knight implements Piece {
         return Collections.emptyList();
     }
 
-    @Override
     public boolean isValidMove(Position startPosition, Position endPosition) {
         int yDistance = Math.abs(startPosition.getBoardColumn().getPosition() - endPosition.getBoardColumn().getPosition());
         int xDistance = Math.abs(startPosition.getBoardRow().getPosition() - endPosition.getBoardRow().getPosition());

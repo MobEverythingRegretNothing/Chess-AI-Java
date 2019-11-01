@@ -2,14 +2,13 @@ package chess.model.piece;
 
 import chess.model.GameState;
 import chess.model.Move;
-import chess.model.enumeration.Color;
 import chess.model.Position;
+import chess.model.enumeration.Color;
 
 import java.util.Collections;
 import java.util.List;
 
 import static chess.model.enumeration.Color.WHITE;
-import static chess.model.piece.Util.*;
 
 public class Queen implements Piece {
 
@@ -22,13 +21,6 @@ public class Queen implements Piece {
     @Override
     public List<Move> getValidMoves(Position startPosition, GameState gameState) {
         return Collections.emptyList();
-    }
-
-    @Override
-    public boolean isValidMove(Position startPosition, Position endPosition) {
-        return isDiagonalMove(startPosition, endPosition)
-                || isStraightMoveAlongRow(startPosition, endPosition)
-                || isStraightMoveAlongColumn(startPosition, endPosition);
     }
 
     @Override

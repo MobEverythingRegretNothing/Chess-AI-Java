@@ -79,13 +79,13 @@ public class GameState {
 
 
         String[][] board = new String[8][8];
-        this.getPieceMap().forEach((key, value) -> board[key.getBoardRow().getPosition()]
-                [key.getBoardColumn().getPosition()] = value.toString());
+        this.getPieceMap().forEach((key, value) -> board[key.getBoardColumn().getPosition()]
+                [key.getBoardRow().getPosition()] = value.toString());
 
-        for(int i = 0; i < 8; i++) {
-            for(int j = 0; j < 8; j++) {
-                if (null == board[i][j]) {
-                    board[i][j] = "  ";
+        for(int x = 0; x < 8; x++) {
+            for(int y = 0; y < 8; y++) {
+                if (null == board[x][y]) {
+                    board[x][y] = "  ";
                 }
             }
         }

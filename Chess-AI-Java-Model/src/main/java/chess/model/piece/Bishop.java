@@ -2,14 +2,13 @@ package chess.model.piece;
 
 import chess.model.GameState;
 import chess.model.Move;
-import chess.model.enumeration.Color;
 import chess.model.Position;
+import chess.model.enumeration.Color;
 
-import java.util.Collections;
 import java.util.List;
 
 import static chess.model.enumeration.Color.WHITE;
-import static chess.model.piece.Util.isDiagonalMove;
+import static chess.model.piece.Util.getDiagonalMoves;
 
 public class Bishop implements Piece {
 
@@ -21,12 +20,7 @@ public class Bishop implements Piece {
 
     @Override
     public List<Move> getValidMoves(Position startPosition, GameState gameState) {
-        return Collections.emptyList();
-    }
-
-    @Override
-    public boolean isValidMove(Position startPosition, Position endPosition) {
-        return isDiagonalMove(startPosition, endPosition);
+        return getDiagonalMoves(startPosition, gameState, this);
     }
 
     @Override

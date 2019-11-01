@@ -31,12 +31,6 @@ public class Rook implements Piece {
         return validMoves;
     }
 
-    @Override
-    public boolean isValidMove(Position startPosition, Position endPosition) {
-        return isStraightMoveAlongColumn(startPosition, endPosition)
-                || isStraightMoveAlongRow(startPosition, endPosition);
-    }
-
     public Color getColor() {
         return color;
     }
