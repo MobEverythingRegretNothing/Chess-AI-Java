@@ -1,14 +1,17 @@
-package chess.model;
+package chess.model.enumeration;
+
+import java.util.Arrays;
+import java.util.Optional;
 
 public enum BoardRow {
-    ONE(1),
-    TWO(2),
-    THREE(3),
-    FOUR(4),
-    FIVE(5),
-    SIX(6),
-    SEVEN(7),
-    EIGHT(8);
+    ONE(0),
+    TWO(1),
+    THREE(2),
+    FOUR(3),
+    FIVE(4),
+    SIX(5),
+    SEVEN(6),
+    EIGHT(7);
 
     private final int position;
 
@@ -23,4 +26,14 @@ public enum BoardRow {
     public String getName() {
         return this.name();
     }
+
+    public static BoardRow getBoardRow(int position) {
+        Optional<BoardRow> columnNumber = Arrays.stream(values())
+                .filter(row -> row.position == position)
+                .findFirst();
+        return columnNumber.orElseThrow(RuntimeException::new);
+
+    }
+
 }
+
