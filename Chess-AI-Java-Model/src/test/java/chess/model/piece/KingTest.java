@@ -1,5 +1,6 @@
-import static org.junit.Assert.*;
+package chess.model.piece;
 
 public class KingTest {
+
 
 }
