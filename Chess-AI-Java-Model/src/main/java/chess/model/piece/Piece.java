@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface Piece {
 
-    List<Move> getValidMoves(Position startPosition, GameState gameState);
+    List<Move> getValidMoves(GameState gameState);
 
     Color getColor();
+
+    Position getPosition();
 }

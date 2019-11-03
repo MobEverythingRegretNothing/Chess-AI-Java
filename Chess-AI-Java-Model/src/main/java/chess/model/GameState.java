@@ -5,9 +5,7 @@ import chess.model.enumeration.Color;
 import chess.model.piece.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static chess.model.enumeration.BoardColumn.*;
 import static chess.model.enumeration.BoardRow.*;
@@ -16,13 +14,13 @@ import static chess.model.enumeration.Color.WHITE;
 
 public class GameState {
     private List<Move> moveList;
-    private Map<Position, Piece> pieceMap;
+    private List<Piece> pieceList;
     private MoveTuple currentMove;
 
 
     public GameState() {
         this.moveList = new ArrayList<>();
-        this.pieceMap = new HashMap<>();
+        this.pieceList = new ArrayList<>();
         currentMove = new MoveTuple(1, WHITE);
     }
 
@@ -32,55 +30,55 @@ public class GameState {
     }
 
     private void setupStandardGameState() {
-       this.pieceMap = new HashMap<>();
+       this.pieceList = new ArrayList<>();
 
         // White pieces
         for (int i = 0; i < 8; i++) {
-            pieceMap.put(new Position(BoardColumn.values()[i], TWO), new Pawn(WHITE));
+            pieceList.add(new Pawn(WHITE, BoardColumn.values()[i], TWO));
         }
 
-        pieceMap.put(new Position(A, ONE), new Rook(WHITE));
-        pieceMap.put(new Position(H, ONE), new Rook(WHITE));
+        pieceList.add(new Rook(WHITE, A, ONE));
+        pieceList.add(new Rook(WHITE, H, ONE));
 
-        pieceMap.put(new Position(B, ONE), new Knight(WHITE));
-        pieceMap.put(new Position(G, ONE), new Knight(WHITE));
+        pieceList.add(new Knight(WHITE, B, ONE));
+        pieceList.add(new Knight(WHITE, G, ONE));
 
-        pieceMap.put(new Position(C, ONE), new Bishop(WHITE));
-        pieceMap.put(new Position(F, ONE), new Bishop(WHITE));
+        pieceList.add(new Bishop(WHITE, C, ONE));
+        pieceList.add(new Bishop(WHITE, F, ONE));
 
-        pieceMap.put(new Position(D, ONE), new Queen(WHITE));
-        pieceMap.put(new Position(E, ONE), new King(WHITE));
+        pieceList.add(new Queen(WHITE, D, ONE));
+        pieceList.add(new King(WHITE, E, ONE));
 
 
         //Black pieces
         for (int i = 0; i < 8; i++) {
-            pieceMap.put(new Position(BoardColumn.values()[i], SEVEN), new Pawn(BLACK));
+            pieceList.add(new Pawn(BLACK, BoardColumn.values()[i], SEVEN));
         }
 
-        pieceMap.put(new Position(A, EIGHT), new Rook(BLACK));
-        pieceMap.put(new Position(H, EIGHT), new Rook(BLACK));
+        pieceList.add(new Rook(BLACK, A, EIGHT));
+        pieceList.add(new Rook(BLACK, H, EIGHT));
 
-        pieceMap.put(new Position(B, EIGHT), new Knight(BLACK));
-        pieceMap.put(new Position(G, EIGHT), new Knight(BLACK));
+        pieceList.add(new Knight(BLACK, B, EIGHT));
+        pieceList.add(new Knight(BLACK, G, EIGHT));
 
-        pieceMap.put(new Position(C, EIGHT), new Bishop(BLACK));
-        pieceMap.put(new Position(F, EIGHT), new Bishop(BLACK));
+        pieceList.add(new Bishop(BLACK, C, EIGHT));
+        pieceList.add(new Bishop(BLACK, F, EIGHT));
 
-        pieceMap.put(new Position(D, EIGHT), new Queen(BLACK));
-        pieceMap.put(new Position(E, EIGHT), new King(BLACK));
+        pieceList.add(new Queen(BLACK, D, EIGHT));
+        pieceList.add(new King(BLACK, E, EIGHT));
     }
 
 
-    public Map<Position, Piece> getPieceMap() {
-        return pieceMap;
+    public List<Piece> getPieceList() {
+        return pieceList;
     }
 
     public String[][] getBoardArray() {
 
 
         String[][] board = new String[8][8];
-        this.getPieceMap().forEach((key, value) -> board[key.getBoardColumn().getPosition()]
-                [key.getBoardRow().getPosition()] = value.toString());
+        this.getPieceList().forEach(piece -> board[piece.getPosition().getBoardColumn().getPosition()]
+                [piece.getPosition().getBoardRow().getPosition()] = piece.toString());
 
         for(int x = 0; x < 8; x++) {
             for(int y = 0; y < 8; y++) {

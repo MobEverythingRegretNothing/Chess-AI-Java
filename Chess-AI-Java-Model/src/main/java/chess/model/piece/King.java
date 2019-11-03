@@ -2,6 +2,8 @@ package chess.model.piece;
 
 import chess.model.GameState;
 import chess.model.Move;
+import chess.model.enumeration.BoardColumn;
+import chess.model.enumeration.BoardRow;
 import chess.model.enumeration.Color;
 import chess.model.Position;
 
@@ -13,24 +15,27 @@ import static chess.model.enumeration.Color.WHITE;
 public class King implements Piece {
 
     private Color color;
+    private Position position;
 
-    public King(Color color) {
+    public King(Color color, BoardColumn column, BoardRow row) {
         this.color = color;
+        this.position = new Position(column, row);
     }
 
     @Override
-    public List<Move> getValidMoves(Position startPosition, GameState gameState) {
-        return Collections.emptyList();
-    }
+    public List<Move> getValidMoves(GameState gameState) {
 
-    public boolean isValidMove(Position startPosition, Position endPosition) {
-        return Math.abs(startPosition.getBoardColumn().getPosition() - endPosition.getBoardColumn().getPosition()) < 2 &&
-                Math.abs(startPosition.getBoardRow().getPosition() - endPosition.getBoardRow().getPosition()) < 2;
+        return Collections.emptyList();
     }
 
     @Override
     public Color getColor() {
         return color;
+    }
+
+    @Override
+    public Position getPosition() {
+        return position;
     }
 
     @Override

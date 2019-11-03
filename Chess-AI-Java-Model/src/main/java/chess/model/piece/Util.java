@@ -12,69 +12,69 @@ import static chess.model.Constants.*;
 
 class Util {
 
-    static List<Move> getColumnMoves(Position startPosition, GameState gameState, Piece piece) {
+    static List<Move> getColumnMoves(GameState gameState, Piece piece) {
         List<Move> validMoves = new ArrayList<>();
 
-        int xStart = startPosition.getBoardColumn().getPosition();
-        int yStart = startPosition.getBoardRow().getPosition();
+        int xStart = piece.getPosition().getBoardColumn().getPosition();
+        int yStart = piece.getPosition().getBoardRow().getPosition();
 
         boolean blocked = false;
         for (int y = yStart + 1; y < yMax && !blocked; y++) {
-            blocked = addMove(startPosition, xStart, y, gameState, piece, validMoves);
+            blocked = addMove(piece.getPosition(), xStart, y, gameState, piece, validMoves);
         }
 
         blocked = false;
         for (int y = yStart - 1; y >= yMin && !blocked; y--) {
-            blocked = addMove(startPosition, xStart, y, gameState, piece, validMoves);
+            blocked = addMove(piece.getPosition(), xStart, y, gameState, piece, validMoves);
         }
 
         return validMoves;
     }
 
-    static List<Move> getRowMoves(Position startPosition, GameState gameState, Piece piece) {
+    static List<Move> getRowMoves(GameState gameState, Piece piece) {
         List<Move> validMoves = new ArrayList<>();
 
-        int xStart = startPosition.getBoardColumn().getPosition();
-        int yStart = startPosition.getBoardRow().getPosition();
+        int xStart = piece.getPosition().getBoardColumn().getPosition();
+        int yStart = piece.getPosition().getBoardRow().getPosition();
 
         boolean blocked = false;
         for (int x = xStart + 1; x < xMax && !blocked; x++) {
-            blocked = addMove(startPosition, x, yStart, gameState, piece, validMoves);
+            blocked = addMove(piece.getPosition(), x, yStart, gameState, piece, validMoves);
         }
 
         blocked = false;
         for (int x = xStart - 1; x >= xMin && !blocked; x--) {
-            blocked = addMove(startPosition, x, yStart, gameState, piece, validMoves);
+            blocked = addMove(piece.getPosition(), x, yStart, gameState, piece, validMoves);
         }
 
         return validMoves;
     }
 
-    static List<Move> getDiagonalMoves(Position startPosition, GameState gameState, Piece piece) {
+    static List<Move> getDiagonalMoves(GameState gameState, Piece piece) {
         List<Move> validMoves = new ArrayList<>();
 
-        int xStart = startPosition.getBoardColumn().getPosition();
-        int yStart = startPosition.getBoardRow().getPosition();
+        int xStart = piece.getPosition().getBoardColumn().getPosition();
+        int yStart = piece.getPosition().getBoardRow().getPosition();
 
         boolean blocked = false;
 
         for (int x = xStart + 1, y = yStart + 1; x < xMax && y < yMax && !blocked; x++, y++) {
-            blocked = addMove(startPosition, x, y, gameState, piece, validMoves);
+            blocked = addMove(piece.getPosition(), x, y, gameState, piece, validMoves);
         }
 
         blocked = false;
         for (int x = xStart - 1, y = yStart + 1; x >= xMin && y < yMax && !blocked; x--, y++) {
-            blocked = addMove(startPosition, x, y, gameState, piece, validMoves);
+            blocked = addMove(piece.getPosition(), x, y, gameState, piece, validMoves);
         }
 
         blocked = false;
         for (int x = xStart + 1, y = yStart - 1; x < xMax && y >= yMin && !blocked; x++, y--) {
-            blocked = addMove(startPosition, x, y, gameState, piece, validMoves);
+            blocked = addMove(piece.getPosition(), x, y, gameState, piece, validMoves);
         }
 
         blocked = false;
         for (int x = xStart - 1, y = yStart - 1; x >= xMin && y >= yMin && !blocked; x--, y--) {
-            blocked = addMove(startPosition, x, y, gameState, piece, validMoves);
+            blocked = addMove(piece.getPosition(), x, y, gameState, piece, validMoves);
         }
 
         return validMoves;

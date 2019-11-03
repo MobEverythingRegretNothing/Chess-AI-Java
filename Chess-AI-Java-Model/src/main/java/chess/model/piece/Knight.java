@@ -2,37 +2,59 @@ package chess.model.piece;
 
 import chess.model.GameState;
 import chess.model.Move;
+import chess.model.enumeration.BoardColumn;
+import chess.model.enumeration.BoardRow;
 import chess.model.enumeration.Color;
 import chess.model.Position;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static chess.model.Constants.*;
 import static chess.model.enumeration.Color.WHITE;
+import static chess.model.piece.Util.translateColor;
 
 public class Knight implements Piece {
 
     private Color color;
+    private Position position;
 
-    public Knight(Color color) {
+    public Knight(Color color, BoardColumn column, BoardRow row) {
         this.color = color;
+        this.position = new Position(column, row);
     }
 
     @Override
-    public List<Move> getValidMoves(Position startPosition, GameState gameState) {
-        return Collections.emptyList();
-    }
+    public List<Move> getValidMoves(GameState gameState) {
+        List<Move> validMoves = new ArrayList<>();
+        int[] x = {2, 1, -1, -2, -2, -1, 1, 2};
+        int[] y = {1, 2, 2, 1, -1 - 2, -2, -1};
 
-    public boolean isValidMove(Position startPosition, Position endPosition) {
-        int yDistance = Math.abs(startPosition.getBoardColumn().getPosition() - endPosition.getBoardColumn().getPosition());
-        int xDistance = Math.abs(startPosition.getBoardRow().getPosition() - endPosition.getBoardRow().getPosition());
+        for (int i = 0; i < 8; i++) {
+            int xPos = position.getBoardRow().getPosition() + x[i];
+            int yPos = position.getBoardColumn().getPosition() + y[i];
+            if (xPos >= xMin && yPos >= yMin && xPos < xMax && yPos < yMax && !gameState.getBoardArray()[xPos][yPos].contains(translateColor(color))) {
+                validMoves.add(new Move(this,
+                        position,
+                        new Position(xPos, yPos),
+                        !gameState.getBoardArray()[xPos][yPos].equals("  "),
+                        gameState.getCurrentMove().moveNumber,
+                        color));
+            }
+        }
 
-        return xDistance + yDistance == 3 && xDistance != 0 && yDistance != 0;
+        return validMoves;
     }
 
     @Override
     public Color getColor() {
         return color;
+    }
+
+    @Override
+    public Position getPosition() {
+        return position;
     }
 
     @Override
