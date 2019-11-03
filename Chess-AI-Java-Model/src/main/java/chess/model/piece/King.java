@@ -7,10 +7,13 @@ import chess.model.enumeration.BoardRow;
 import chess.model.enumeration.Color;
 import chess.model.Position;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
+import static chess.model.Constants.*;
+import static chess.model.Constants.yMax;
 import static chess.model.enumeration.Color.WHITE;
+import static chess.model.piece.Util.translateColor;
 
 public class King implements Piece {
 
@@ -24,8 +27,26 @@ public class King implements Piece {
 
     @Override
     public List<Move> getValidMoves(GameState gameState) {
+        List<Move> validMoves = new ArrayList<>();
+        int[] x = {1, 1, 0, -1, -1, -1,  0,  1};
+        int[] y = {0, 1, 1,  1,  0, -1, -1, -1};
 
-        return Collections.emptyList();
+        for (int i = 0; i < 8; i++) {
+            int xPos = position.getBoardRow().getPosition() + x[i];
+            int yPos = position.getBoardColumn().getPosition() + y[i];
+            if (xPos >= xMin && yPos >= yMin && xPos < xMax && yPos < yMax && !gameState.getBoardArray()[xPos][yPos].contains(translateColor(color))) {
+                validMoves.add(new Move(this,
+                        position,
+                        new Position(xPos, yPos),
+                        !gameState.getBoardArray()[xPos][yPos].equals("  "),
+                        gameState.getCurrentMove().moveNumber,
+                        color));
+            }
+        }
+        //TODO: Castling
+        
+
+        return validMoves;
     }
 
     @Override
