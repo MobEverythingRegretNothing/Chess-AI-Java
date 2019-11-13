@@ -1,14 +1,15 @@
 package chess;
 
 import chess.model.GameState;
+import chess.model.Move;
 import chess.model.enumeration.Color;
 import chess.output.BoardPrinter;
 
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import static chess.Util.isResignation;
-import static chess.model.enumeration.Color.BLACK;
-import static chess.model.enumeration.Color.WHITE;
+import static chess.model.enumeration.Color.*;
 
 public class GameController {
 
@@ -51,13 +52,18 @@ public class GameController {
                     gameOngoing = false;
                 } else {
                     // TODO: Validate player choice
+                    if (gameState.getValidMoves().stream().map(Move::toString).collect(Collectors.toList()).contains(move)) {
+                        Move currentMove = gameState.getMoveList().get(gameState.getMoveList().size() - 1);
+                        System.out.println("Valid Move!");
 
+                        // TODO: Do Move
+                        System.out.println("Moving . . .");
 
-                    // TODO: Do Move
+                        // TODO: Check for CHECKMATE/CHECK/DRAW (REPETITION/NO VALID MOVES/MAX MOVES/TIME???)
 
-                    // TODO: Check for CHECKMATE/CHECK/DRAW (REPETITION/NO VALID MOVES/MAX MOVES/TIME???)
-
-                    // TODO: Add move to and advance gamestate
+                        // TODO: Add move to and advance gamestate
+                        gameState.addMove(new Move(move, gameState));
+                    }
                 }
 
 

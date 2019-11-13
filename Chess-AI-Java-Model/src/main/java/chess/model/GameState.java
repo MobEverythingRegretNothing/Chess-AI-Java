@@ -1,11 +1,11 @@
 package chess.model;
 
 import chess.model.enumeration.BoardColumn;
-import chess.model.enumeration.Color;
 import chess.model.piece.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static chess.model.Constants.*;
 import static chess.model.enumeration.BoardColumn.*;
@@ -16,13 +16,10 @@ import static chess.model.enumeration.Color.WHITE;
 public class GameState {
     private List<Move> moveList;
     private List<Piece> pieceList;
-    private MoveTuple currentMove;
-
 
     public GameState() {
         this.moveList = new ArrayList<>();
         this.pieceList = new ArrayList<>();
-        currentMove = new MoveTuple(1, WHITE);
     }
 
     public GameState init() {
@@ -67,48 +64,39 @@ public class GameState {
 
         pieceList.add(new Queen(BLACK, D, EIGHT));
         pieceList.add(new King(BLACK, E, EIGHT));
-        
-        this.currentMove = new MoveTuple(1, WHITE);
     }
 
+    public void addMove(Move nextMove) {
+        // TODO: Add move to move list
+        this.moveList.add(nextMove);
+        // TODO: Change piece placement
+
+        //TODO: Change currentMove
+
+    }
 
     public List<Piece> getPieceList() {
         return pieceList;
     }
 
-    public String[][] getBoardArray() {
-
-
-        String[][] board = new String[xMax][yMax];
+    public Piece[][] getBoardArray() {
+        Piece[][] board = new Piece[xMax][yMax];
         this.getPieceList().forEach(piece -> board[piece.getPosition().getBoardColumn().getPosition()]
-                [piece.getPosition().getBoardRow().getPosition()] = piece.toString());
-
-        for(int x = xMin; x < xMax; x++) {
-            for(int y = yMin; y < yMax; y++) {
-                if (null == board[x][y]) {
-                    board[x][y] = "  ";
-                }
-            }
-        }
+                [piece.getPosition().getBoardRow().getPosition()] = piece);
 
         return board;
+    }
+
+    public List<Move> getValidMoves() {
+        // TODO: Need to handle being in check
+        return this.pieceList.stream().map(piece -> piece.getValidMoves(this)).flatMap(List::stream).collect(Collectors.toList());
     }
 
     public List<Move> getMoveList() {
         return moveList;
     }
 
-    public MoveTuple getCurrentMove() {
-        return currentMove;
-    }
-
-    public static class MoveTuple {
-        public Integer moveNumber;
-        public Color color;
-
-        public MoveTuple(Integer moveNumber, Color color) {
-            this.moveNumber = moveNumber;
-            this.color = color;
-        }
+    public Piece getPieceAtLocation(Position position) {
+        return this.getBoardArray()[position.getBoardColumn().getPosition()][position.getBoardRow().getPosition()];
     }
 }

@@ -10,6 +10,7 @@ import chess.model.Position;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static chess.model.Constants.*;
 import static chess.model.enumeration.Color.WHITE;
@@ -34,11 +35,11 @@ public class Knight implements Piece {
         for (int i = 0; i < 8; i++) {
             int xPos = position.getBoardRow().getPosition() + x[i];
             int yPos = position.getBoardColumn().getPosition() + y[i];
-            if (xPos >= xMin && yPos >= yMin && xPos < xMax && yPos < yMax && !gameState.getBoardArray()[xPos][yPos].contains(translateColor(color))) {
+            if (xPos >= xMin && yPos >= yMin && xPos < xMax && yPos < yMax && !(gameState.getBoardArray()[xPos][yPos].getColor() == color)) {
                 validMoves.add(new Move(this,
                         position,
                         new Position(xPos, yPos),
-                        !gameState.getBoardArray()[xPos][yPos].equals("  "),
+                        !Objects.isNull(gameState.getBoardArray()[xPos][yPos]),
                         gameState.getCurrentMove().moveNumber,
                         color));
             }

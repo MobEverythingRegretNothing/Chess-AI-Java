@@ -82,9 +82,9 @@ public class Util {
 
     private static boolean addMove(Position startPosition, int x, int y,
                                    GameState gameState, Piece piece, List<Move> validMoves) {
-        String[][] boardArray = gameState.getBoardArray();
+        Piece[][] boardArray = gameState.getBoardArray();
 
-        if ("  ".equals(boardArray[x][y])) {
+        if (null == boardArray[x][y]) {
             validMoves.add(new Move(piece,
                     startPosition,
                     new Position(x, y), false,
@@ -92,7 +92,7 @@ public class Util {
                     piece.getColor()));
             return false;
         } else {
-            if (boardArray[x][y].contains(translateColor(piece.getColor()))) {
+            if (boardArray[x][y].getColor() == piece.getColor()) {
                 return true;
             } else {
                 validMoves.add(
@@ -117,9 +117,9 @@ public class Util {
         }
     }
 
-    public static String[][] transpose(String[][] matrix) {
+    public static Piece[][] transpose(Piece[][] matrix) {
         int n = matrix.length;
-        String[][] transpose = new String[n][n];
+        Piece[][] transpose = new Piece[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 transpose[j][i] = matrix[i][j];
@@ -128,9 +128,9 @@ public class Util {
         return transpose;
     }
 
-    public static String[][] flip(String[][] matrix) {
+    static Piece[][] flip(Piece[][] matrix) {
         int n = matrix.length;
-        String[][] flipped = new String[n][n];
+        Piece[][] flipped = new Piece[n][n];
         for (int x = 0; x < n; x++) {
             for (int y = 0; y < n; y++) {
                 flipped[x][y] = flipped[x][n - 1 - y];
