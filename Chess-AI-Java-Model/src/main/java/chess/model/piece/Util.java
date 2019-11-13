@@ -10,7 +10,7 @@ import java.util.List;
 
 import static chess.model.Constants.*;
 
-class Util {
+public class Util {
 
     static List<Move> getColumnMoves(GameState gameState, Piece piece) {
         List<Move> validMoves = new ArrayList<>();
@@ -117,7 +117,7 @@ class Util {
         }
     }
 
-    static String[][] transpose(String[][] matrix) {
+    public static String[][] transpose(String[][] matrix) {
         int n = matrix.length;
         String[][] transpose = new String[n][n];
         for (int i = 0; i < n; i++) {
@@ -126,5 +126,17 @@ class Util {
             }
         }
         return transpose;
+    }
+
+    public static String[][] flip(String[][] matrix) {
+        int n = matrix.length;
+        String[][] flipped = new String[n][n];
+        for (int x = 0; x < n; x++) {
+            for (int y = 0; y < n; y++) {
+                flipped[x][y] = flipped[x][n - 1 - y];
+            }
+        }
+
+        return flipped;
     }
 }

@@ -7,6 +7,7 @@ import chess.model.piece.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static chess.model.Constants.*;
 import static chess.model.enumeration.BoardColumn.*;
 import static chess.model.enumeration.BoardRow.*;
 import static chess.model.enumeration.Color.BLACK;
@@ -33,7 +34,7 @@ public class GameState {
        this.pieceList = new ArrayList<>();
 
         // White pieces
-        for (int i = 0; i < 8; i++) {
+        for (int i = xMin; i < xMax; i++) {
             pieceList.add(new Pawn(WHITE, BoardColumn.values()[i], TWO));
         }
 
@@ -51,7 +52,7 @@ public class GameState {
 
 
         //Black pieces
-        for (int i = 0; i < 8; i++) {
+        for (int i = xMin; i < xMax; i++) {
             pieceList.add(new Pawn(BLACK, BoardColumn.values()[i], SEVEN));
         }
 
@@ -66,6 +67,8 @@ public class GameState {
 
         pieceList.add(new Queen(BLACK, D, EIGHT));
         pieceList.add(new King(BLACK, E, EIGHT));
+        
+        this.currentMove = new MoveTuple(1, WHITE);
     }
 
 
@@ -76,12 +79,12 @@ public class GameState {
     public String[][] getBoardArray() {
 
 
-        String[][] board = new String[8][8];
+        String[][] board = new String[xMax][yMax];
         this.getPieceList().forEach(piece -> board[piece.getPosition().getBoardColumn().getPosition()]
                 [piece.getPosition().getBoardRow().getPosition()] = piece.toString());
 
-        for(int x = 0; x < 8; x++) {
-            for(int y = 0; y < 8; y++) {
+        for(int x = xMin; x < xMax; x++) {
+            for(int y = yMin; y < yMax; y++) {
                 if (null == board[x][y]) {
                     board[x][y] = "  ";
                 }

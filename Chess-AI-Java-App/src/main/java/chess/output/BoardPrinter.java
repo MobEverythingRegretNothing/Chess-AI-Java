@@ -4,6 +4,7 @@ import chess.model.GameState;
 import chess.model.enumeration.Color;
 
 import static chess.model.enumeration.Color.WHITE;
+import static chess.model.piece.Util.transpose;
 
 public class BoardPrinter {
 
@@ -16,6 +17,6 @@ public class BoardPrinter {
     }
 
     private static String getRowString(GameState gameState, int rowNumber, Color playerColor) {
-        return "| " + String.join(" | ", gameState.getBoardArray()[playerColor == WHITE ?  8 - rowNumber : rowNumber - 1]) + " |";
+        return "| " + String.join(" | ", transpose(gameState.getBoardArray())[playerColor == WHITE ?  8 - rowNumber : rowNumber - 1]) + " |";
     }
 }

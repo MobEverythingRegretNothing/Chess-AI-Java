@@ -6,6 +6,7 @@ import chess.output.BoardPrinter;
 
 import java.util.Scanner;
 
+import static chess.Util.isResignation;
 import static chess.model.enumeration.Color.BLACK;
 import static chess.model.enumeration.Color.WHITE;
 
@@ -40,12 +41,24 @@ public class GameController {
             System.out.println("Your move...");
 
             boolean gameOngoing = true;
-            Color turnIndicator = WHITE;
-
             while (gameOngoing) {
-                
+
+                // TODO: Ask for input move OR resign
+                System.out.print("Please input a move: ");
+                String move = input.next();
+
+                if (isResignation(move)) {
+                    gameOngoing = false;
+                } else {
+                    // TODO: Validate player choice
 
 
+                    // TODO: Do Move
+
+                    // TODO: Check for CHECKMATE/CHECK/DRAW (REPETITION/NO VALID MOVES/MAX MOVES/TIME???)
+
+                    // TODO: Add move to and advance gamestate
+                }
 
 
 
