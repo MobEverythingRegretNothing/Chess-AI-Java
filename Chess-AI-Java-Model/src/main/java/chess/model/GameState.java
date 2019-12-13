@@ -16,6 +16,7 @@ import static chess.model.enumeration.Color.WHITE;
 public class GameState {
     private List<Move> moveList;
     private List<Piece> pieceList;
+    private List<Piece> captured;
 
     public GameState() {
         this.moveList = new ArrayList<>();
@@ -29,6 +30,7 @@ public class GameState {
 
     private void setupStandardGameState() {
        this.pieceList = new ArrayList<>();
+       this.captured = new ArrayList<>();
 
         // White pieces
         for (int i = xMin; i < xMax; i++) {
@@ -98,5 +100,17 @@ public class GameState {
 
     public Piece getPieceAtLocation(Position position) {
         return this.getBoardArray()[position.getBoardColumn().getPosition()][position.getBoardRow().getPosition()];
+    }
+
+    public List<Piece> getCaptured() {
+        return captured;
+    }
+
+    public void setCaptured(List<Piece> captured) {
+        this.captured = captured;
+    }
+
+    public int getMoveNumber() {
+        return getMoveList().get(getMoveList().size() - 1).getMoveNumber();
     }
 }

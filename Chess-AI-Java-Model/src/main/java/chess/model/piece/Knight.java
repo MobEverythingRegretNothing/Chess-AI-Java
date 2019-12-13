@@ -40,7 +40,7 @@ public class Knight implements Piece {
                         position,
                         new Position(xPos, yPos),
                         !Objects.isNull(gameState.getBoardArray()[xPos][yPos]),
-                        gameState.getCurrentMove().moveNumber,
+                        gameState.getMoveList().size(),
                         color));
             }
         }

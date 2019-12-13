@@ -24,7 +24,6 @@ public class Rook implements Piece {
         this.position = new Position(column, row);
     }
 
-
     @Override
     public List<Move> getValidMoves(GameState gameState) {
         List<Move> validMoves = new ArrayList<>();

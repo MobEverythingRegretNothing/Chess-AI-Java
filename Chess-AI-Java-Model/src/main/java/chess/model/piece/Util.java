@@ -88,7 +88,7 @@ public class Util {
             validMoves.add(new Move(piece,
                     startPosition,
                     new Position(x, y), false,
-                    gameState.getCurrentMove().moveNumber,
+                    gameState.getMoveNumber(),
                     piece.getColor()));
             return false;
         } else {
@@ -97,7 +97,7 @@ public class Util {
             } else {
                 validMoves.add(
                         new Move(piece, startPosition, new Position(x, y),
-                                true, gameState.getCurrentMove().moveNumber, piece.getColor()
+                                true, gameState.getMoveNumber(), piece.getColor()
                         )
                 );
                 return true;

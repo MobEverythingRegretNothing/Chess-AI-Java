@@ -2,19 +2,17 @@ package chess.model.piece;
 
 import chess.model.GameState;
 import chess.model.Move;
+import chess.model.Position;
 import chess.model.enumeration.BoardColumn;
 import chess.model.enumeration.BoardRow;
 import chess.model.enumeration.Color;
-import chess.model.Position;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import static chess.model.Constants.*;
-import static chess.model.Constants.yMax;
 import static chess.model.enumeration.Color.WHITE;
-import static chess.model.piece.Util.translateColor;
 
 public class King implements Piece {
 
@@ -40,13 +38,14 @@ public class King implements Piece {
                         position,
                         new Position(xPos, yPos),
                         !Objects.isNull(gameState.getBoardArray()[xPos][yPos]),
-                        gameState.getCurrentMove().moveNumber,
+                        gameState.getMoveNumber(),
                         color));
             }
         }
-        
-        //TODO: Castling
 
+        //TODO: Check Long Castle
+
+        //TODO: Check Short Castle
 
         return validMoves;
     }
